@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.1",
+  "name": "SMILE Digital Twin Advisor — Hospital Operations",
+  "description": "A domain-specific AI agent that solves real hospital operations problems (bed utilisation, equipment downtime, energy waste, patient readmission) by routing through all 7 LPI MCP tools with a multi-step reasoning loop, then synthesising results with a local Ollama LLM into a structured SMILE implementation roadmap. Every claim is cited to the specific LPI tool that provided it. Includes full provenance tracking and all 3 easter eggs found and documented.",
+  "author": {
+    "name": "Ankit Kumar Singh",
+    "github": "ankitsinghh007",
+    "program": "B.Tech CSE",
+    "campus": "Amity"
+  },
+  "url": "https://github.com/ankitsinghh007/smile-hospital-agent",
+  "version": "2.0.0",
+  "created_at": "2026-04-16",
+  "capabilities": {
+    "streaming": false,
+    "push_notifications": false,
+    "state_management": false,
+    "multi_step_reasoning": true,
+    "domain_routing": true,
+    "explainability": "full"
+  },
+  "skills": [
+    {
+      "id": "bed_utilisation_advisor",
+      "name": "Bed Utilisation Digital Twin Roadmap",
+      "description": "Takes a hospital bed management / patient flow problem and returns a phased SMILE roadmap. Starts from impact KPIs (occupancy variance, discharge prediction accuracy), maps the patient flow ecosystem in Phase 1, defines a MVT for a subset of high-variance wards in Phase 2, and builds towards a real-time discharge prediction twin.",
+      "input_modes": ["text"],
+      "output_modes": ["text"],
+      "examples": [
+        "Surgical ward at 98% occupancy while medical wards run at 60%",
+        "No real-time visibility of patient flow or predicted discharge dates"
+      ]
+    },
+    {
+      "id": "equipment_maintenance_advisor",
+      "name": "Equipment Predictive Maintenance Roadmap",
+      "description": "Maps MRI, CT, ventilator, or other clinical device downtime problems to SMILE phases. Key insight: failure mode ontology (Phase 3) must precede AI (Phase 5). Returns a roadmap from equipment Reality Canvas through ontology creation to a condition-based maintenance twin.",
+      "input_modes": ["text"],
+      "output_modes": ["text"],
+      "examples": [
+        "MRI downtime 10 unplanned hours per week, calendar-based maintenance only",
+        "CT scanner failing without warning, engineers reactive not proactive"
+      ]
+    },
+    {
+      "id": "hospital_energy_advisor",
+      "name": "Hospital Energy Digital Twin Roadmap",
+      "description": "Applies SMILE to hospital energy problems — HVAC on fixed schedules, no room-level visibility, net-zero targets with no baseline. Returns a roadmap from Reality Canvas of energy flows through edge-native contextual intelligence for occupancy-aware HVAC control.",
+      "input_modes": ["text"],
+      "output_modes": ["text"],
+      "examples": [
+        "Energy costs up 38%, HVAC on fixed weekly schedule regardless of occupancy",
+        "No room-level energy measurement, board net-zero target for 2030"
+      ]
+    }
+  ],
+  "tools_used": [
+    "smile_overview",
+    "list_topics",
+    "query_knowledge",
+    "get_case_studies",
+    "get_insights",
+    "smile_phase_detail",
+    "get_methodology_step"
+  ],
+  "tool_count": 7,
+  "reasoning": {
+    "type": "multi_step",
+    "steps": 8,
+    "description": "Step 1: SMILE overview. Step 2: list_topics to discover KB areas. Step 3: title-boosted first knowledge search. Step 4: refined knowledge search based on step 3 findings. Step 5: domain-matched case studies. Step 6: scenario-specific insights. Step 7: phase deep-dive. Step 8: MVT methodology steps.",
+    "refinement_loop": "query_knowledge called twice — second call uses terms extracted from first result"
+  },
+  "llm": {
+    "provider": "Ollama",
+    "model": "qwen2.5:1.5b",
+    "local": true,
+    "cloud_api_required": false,
+    "fallback_models": ["llama3.2", "mistral", "phi3"]
+  },
+  "explainability": {
+    "provenance_tracking": true,
+    "source_citation": true,
+    "why_tool_called": true,
+    "easter_eggs_found": 3,
+    "egg_2_answer": 6,
+    "title_boost_exploit": "_title_boost_query() prepends domain nouns matching KB entry titles verbatim"
+  },
+  "domain": "Healthcare / Hospital Operations",
+  "transport": "mcp-subprocess-stdio",
+  "tags": [
+    "digital-twins", "SMILE", "LifeAtlas", "hospital", "healthcare",
+    "local-LLM", "explainable-AI", "MCP", "A2A", "multi-step-reasoning",
+    "title-boost", "easter-eggs"
+  ]
+}
