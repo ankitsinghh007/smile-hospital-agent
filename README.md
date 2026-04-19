@@ -1,8 +1,24 @@
 # SMILE Digital Twin Advisor — Hospital Operations
 
+A domain-specific AI agent that uses SMILE methodology and LPI tools to generate structured digital twin implementation roadmaps for hospital operations.
+
 > **Author:** Ankit Kumar Singh · [ankitsinghh007](https://github.com/ankitsinghh007)  
 > **Track:** A — Agent Builders · **Level:** 3  
 > **Program:** LifeAtlas Contributor Program — WINNIIO
+
+---
+
+## Project Setup Requirement
+
+This agent depends on the LPI Developer Kit.
+
+Required folder structure:
+
+lifeatlas-project/
+  ├── lpi-developer-kit/
+  └── smile-hospital-agent/
+
+The agent connects to the MCP server provided by the LPI repository.
 
 ---
 
@@ -20,6 +36,7 @@ Hospitals worldwide face four chronic operational problems:
 This agent takes a specific hospital problem, routes it through the right LPI
 tools using decision logic, and produces a phased SMILE implementation roadmap —
 every claim cited back to the tool that provided it.
+This approach follows SMILE’s core principle: “Impact First, Data Last” — defining outcomes before selecting data or technology.
 
 ---
 
@@ -77,15 +94,15 @@ Hospital problem description
 
 | # | Location | Answer |
 |---|----------|--------|
-| 🥚 1 | `src/index.ts` — comment at top | Same clue as egg #2 |
-| 🥚 2 | Query `"impact first data last"` | **6** results mention ontology |
-| 🥚 3 | `data/knowledge-base.json` entry `kb-egg` | Title match scoring exploited → `_title_boost_query()` |
+| 1 | `src/index.ts` — comment at top | Same clue as egg #2 |
+| 2 | Query `"impact first data last"` | **6** results mention ontology |
+| 3 | `data/knowledge-base.json` entry `kb-egg` | Title match scoring exploited → `_title_boost_query()` |
 
-Full explanation of all three in `HOW_I_DID_IT.md`.
+Full explanation of all three in `HOW-I-DID-IT.md`.
 
 ---
 
-## What makes this different from a generic agent
+## Key Differentiators
 
 | Feature | Typical Level 3 | This agent |
 |---------|----------------|-----------|
@@ -102,27 +119,27 @@ Full explanation of all three in `HOW_I_DID_IT.md`.
 ## Setup and run order
 
 ```bash
-# ── Step 1: Build the LPI server ──────────────────────────────
+# Step 1: Build the LPI server
 cd lpi-developer-kit
 npm install
 npm run build
-npm run test-client        # verify all 7 tools pass
+npm run test-client       
 
-# ── Step 2: Start Ollama (keep this terminal open) ────────────
+# Step 2: Start Ollama 
 ollama serve
-ollama pull qwen2.5:1.5b   # ~1GB, one-time download
+ollama pull qwen2.5:1.5b   
 
-# ── Step 3: Install Python deps ───────────────────────────────
-pip install requests       # required
-pip install rich           # optional — colour terminal output
+# Step 3: Install Python deps
+pip install requests      
+pip install rich          
 
-# ── Step 4: Clone agent repo ──────────────────────────────────
+# Step 4: Clone agent repo
 git clone https://github.com/ankitsinghh007/smile-hospital-agent
 cd smile-hospital-agent
 
-# ── Step 5: Run ───────────────────────────────────────────────
-python agent.py                   # interactive mode
-python agent.py --demo            # 3 preset hospital scenarios
+# Step 5: Run 
+python agent.py                   
+python agent.py --demo            
 python agent.py --problem "High bed occupancy variance across wards"
 python agent.py --problem "MRI downtime 10h/week" --model llama3.2
 ```
@@ -186,5 +203,11 @@ frequency heatmap by machine and defect category.
 |------|---------|
 | `agent.py` | Main agent — domain detection, 8-tool pipeline, reasoning loop, Ollama synthesis |
 | `agent.json` | A2A Agent Card — 3 hospital skills, all 7 LPI tools declared |
-| `HOW_I_DID_IT.md` | Step-by-step process, all 3 easter egg answers, real lessons learned |
+| `HOW-I-DID-IT.md` | Step-by-step process, all 3 easter egg answers, real lessons learned |
 | `README.md` | This file |
+
+---
+
+## Conclusion
+
+This agent demonstrates how structured tools, domain-specific reasoning, and SMILE methodology can be combined to produce explainable, real-world AI systems instead of generic LLM responses.

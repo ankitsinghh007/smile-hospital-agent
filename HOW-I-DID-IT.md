@@ -1,3 +1,11 @@
+## Summary
+
+Built a domain-specific SMILE agent for hospital operations using all 7 LPI tools, 
+with a 2-pass reasoning loop and title-boosted search. Discovered and implemented 
+all 3 easter eggs by analyzing the knowledge store and source code.
+
+---
+
 # HOW_I_DID_IT.md
 
 **Author:** Ankit Kumar Singh  
@@ -62,7 +70,7 @@ This became my `_title_boost_query()` function.
 **Eggs #1 and #2** were in a comment at the very top of `src/index.ts`:
 
 ```
-// 🥚 Easter egg #2: Query "query_knowledge" with the exact phrase "impact first data last"
+// Easter egg #2: Query "query_knowledge" with the exact phrase "impact first data last"
 // and count how many results mention "ontology". Put the number in your HOW_I_DID_IT.md
 // for bonus points. There's one more egg hidden in the data files.
 ```
@@ -178,9 +186,9 @@ part of this project.
 
 | Egg | Location | Answer |
 |-----|----------|--------|
-| 🥚 #1 | `src/index.ts` — comment at top of file | (same clue as #2) |
-| 🥚 #2 | Query `"impact first data last"` → count ontology results | **6** |
-| 🥚 #3 | `data/knowledge-base.json` entry `kb-egg` | Title match scoring → exploited in `_title_boost_query()` |
+| #1 | `src/index.ts` — comment at top of file | (same clue as #2) |
+| #2 | Query `"impact first data last"` → count ontology results | **6** |
+| #3 | `data/knowledge-base.json` entry `kb-egg` | Title match scoring → exploited in `_title_boost_query()` |
 
 ---
 
@@ -195,14 +203,13 @@ ollama serve
 ollama pull qwen2.5:1.5b
 
 # 3. Install Python dependency
-pip install requests          # required
-pip install rich              # optional — pretty output
+pip install requests          
+pip install rich              
 
 # 4. Run the agent
 cd smile-hospital-agent
 
-python agent.py                  # interactive mode
-python agent.py --demo           # 3 preset hospital scenarios
+python agent.py                  
+python agent.py --demo        
 python agent.py --problem "High bed occupancy variance — surgical ward at 98%, medical at 60%"
-python agent.py --problem "MRI downtime 10h/week" --model llama3.2
 ```
